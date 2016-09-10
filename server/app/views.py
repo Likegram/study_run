@@ -4,10 +4,22 @@ from django.shortcuts import render
 
 from .models import Course, Student, StudentCourse
 
-from .serializers import CourseSerializer
+from .serializers import CourseSerializer, StudentSerialiser
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
+
+
+class StudentViewSet(viewsets.ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerialiser
+
+    @list_route(methods=['GET'])
+    def make(self, request):
+        username = request.GET.get('username', None)
+        if username:
+            Student.objects.get_or_create(nickname=username)
+        return Response({'success': True})
 
 
 class CourseViewSet(viewsets.ModelViewSet):
