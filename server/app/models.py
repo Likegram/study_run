@@ -17,6 +17,14 @@ class Course(models.Model):
     hidden = models.BooleanField(default=False)
 
 
+class StudentCourse(models.Model):
+    student = models.ForeignKey(Student)
+    course = models.ForeignKey(Course)
+
+    created = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
+
+
 class Lesson(models.Model):
 
     number = models.IntegerField() # for ordering
