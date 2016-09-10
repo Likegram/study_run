@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-import telebot
 import requests
+
+import telebot
 
 from config import token, URL_SERVER
 from contains import START_MESSAGE
